@@ -1,0 +1,14 @@
+﻿@inherits AnimalListViewModel
+
+@foreach (var item in @AnimalList)
+{
+    <p style="background-color:@item.BackgroundColor">@item.Name</p>
+
+}
+<select @bind="@SelectedAnimal">
+    @foreach (var item in @AnimalList)
+    {
+        <option value="@item.Name">@item.Name</option>
+    }
+</select>
+

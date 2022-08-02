@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Components
+@inherits SecondPageViewModel
+
+<p>@IsActive</p>
+<p>@RandomNumber</p>
+<button @onclick="@(() => com.Execute(null))">Click!</button>
+<button @onclick="@(() => diceRoleCommand.Execute(null))">Role a dice now!</button>
+<AnimalListView @bind-AnimalList="@AnimalList"
+                @bind-SelectedAnimal="@SelectedAnimalName"/>
+<button @onclick="@(() => AddDogCommand.Execute(null))">Add a Dog!</button>
+<button @onclick="@(() => AddCatCommand.Execute(null))">Add a Cat!</button>
+<p>@SelectedAnimalName</p>

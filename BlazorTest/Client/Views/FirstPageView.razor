@@ -1,0 +1,13 @@
+﻿@page "/"
+@inherits FirstPageViewModel
+<PageTitle>Dice</PageTitle>
+
+<h1>Dice Role</h1>
+<p>@MyProperty</p>
+<input type="number" @bind-value="@Num" @bind-value:event="oninput"/>
+<p>@TestMyVar</p>
+<p hidden="@TestMyVar">@Num</p>
+<SecondPageView @bind-IsActive="@TestMyVar"
+                @bind-RandomNumber="@Num"/>
+<SecondPageView />
+<SecondPageView />
