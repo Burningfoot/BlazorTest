@@ -1,4 +1,5 @@
-﻿@inherits AnimalListViewModel
+﻿@using ReactiveUI.Blazor
+@inherits ReactiveInjectableComponentBase<AnimalListViewModel>
 
 @foreach (var item in @AnimalList)
 {

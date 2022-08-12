@@ -26,5 +26,7 @@ namespace BlazorTest.ViewModels
         {
             MyProperty = 1;
         }
+
+
     }
 }

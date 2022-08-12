@@ -1,5 +1,7 @@
 ﻿@page "/"
-@inherits FirstPageViewModel
+@using ReactiveUI.Blazor
+@inherits ReactiveInjectableComponentBase<FirstPageViewModel>
+
 <PageTitle>Dice</PageTitle>
 
 <h1>Dice Role</h1>

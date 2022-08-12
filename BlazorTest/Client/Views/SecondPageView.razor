@@ -1,12 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Components
-@inherits SecondPageViewModel
+@using ReactiveUI.Blazor
+
+@inherits ReactiveInjectableComponentBase<SecondPageViewModel>
 
 <p>@IsActive</p>
 <p>@RandomNumber</p>
-<button @onclick="@(() => com.Execute(null))">Click!</button>
-<button @onclick="@(() => diceRoleCommand.Execute(null))">Role a dice now!</button>
+<button @onclick="@(() => @ViewModel.com.Execute())">Click!</button>
+<button @onclick="@(() => @ViewModel.diceRoleCommand.Execute() )">Role a dice now!</button>
 <AnimalListView @bind-AnimalList="@AnimalList"
-                @bind-SelectedAnimal="@SelectedAnimalName"/>
-<button @onclick="@(() => AddDogCommand.Execute(null))">Add a Dog!</button>
-<button @onclick="@(() => AddCatCommand.Execute(null))">Add a Cat!</button>
-<p>@SelectedAnimalName</p>
+                @bind-SelectedAnimal="@SelectedAnimal"/>
+<button @onclick="@(() => @ViewModel.AddDogCommand.Execute())">Add a Dog!</button>
+<button @onclick="@(() => @ViewModel.AddCatCommand.Execute())">Add a Cat!</button>
+<p>@ViewModel.SelectedAnimalName</p>
