@@ -6,35 +6,31 @@ namespace BlazorTest.Client.Views
 {
     public partial class AnimalListView
     {
-        private ObservableCollection<Animal>? animalList;
-        private string? selectedAnimal;
+        private ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
+        private string selectedAnimal;
 
         [Parameter]
-        public ObservableCollection<Animal>? AnimalList
+        public ObservableCollection<Animal> AnimalList
         {
             get { return animalList; }
             set
             {
                 if (animalList == value) return;
                 animalList = value;
-                ViewModel.AnimalList = animalList;
                 AnimalListChanged.InvokeAsync(value);
-                OnPropertyChanged();
             }
         }
 
         [Parameter]
-        public string? SelectedAnimal
+        public string SelectedAnimal 
         {
-            get { return selectedAnimal; }
+            get => selectedAnimal;
             set
             {
                 if (selectedAnimal == value) return;
                 selectedAnimal = value;
-                ViewModel.SelectedAnimal = selectedAnimal;
                 SelectedAnimalChanged.InvokeAsync(value);
-                OnPropertyChanged();
-            }
+            } 
         }
 
         [Parameter]
@@ -42,5 +38,12 @@ namespace BlazorTest.Client.Views
 
         [Parameter]
         public EventCallback<ObservableCollection<Animal>> AnimalListChanged { get; set; }
+
+        protected override Task OnParametersSetAsync()
+        {
+            ViewModel.AnimalList = AnimalList;
+            ViewModel.SelectedAnimal = SelectedAnimal;
+            return base.OnParametersSetAsync();
+        }
     }
 }

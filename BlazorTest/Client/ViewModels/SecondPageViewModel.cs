@@ -7,49 +7,29 @@ namespace BlazorTest.Client.ViewModels
 {
     public class SecondPageViewModel : BaseViewModel
     {
+        private int randomeNumber;
+        private string selectedAnimalName;
+        private ObservableCollection<Animal> animalList;
 
-        private bool isActive;
-        private int? randomeNumber;
-
-        public bool IsActive
+        public int RandomNumber
         {
-            get { return isActive; }
-            set 
-            {
-                if (isActive == value) return;
-                isActive = value;
-            }
-        }
-
-        public int? RandomNumber
-        {
-            get { return randomeNumber; }
-            set 
-            { 
-                if (randomeNumber == value) return;
-                randomeNumber = value;
-            }
+            get => randomeNumber;
+            set => this.RaiseAndSetIfChanged(ref randomeNumber, value);
         }
 
         public bool? IsLoading { get; set; }
 
-        private ObservableCollection<Animal>? animalList;
-
-        public ObservableCollection<Animal>? AnimalList
+        public ObservableCollection<Animal> AnimalList
         {
-            get
-            {
-                return animalList;
-            }
-            set
-            {
-                animalList = value;
-            }
+            get => animalList;
+            set => this.RaiseAndSetIfChanged(ref animalList, value);
         }
-        public string? SelectedAnimalName { get; set; }
+        public string SelectedAnimalName
+        {
+            get => selectedAnimalName;
+            set => this.RaiseAndSetIfChanged(ref selectedAnimalName, value);
+        }
 
-
-        public ReactiveCommand<Unit, Unit>? com { get; set; }
         public ReactiveCommand<Unit, Unit>? diceRoleCommand { get; set; }
         public ReactiveCommand<Unit, Unit>? AddDogCommand { get; set; }
         public ReactiveCommand<Unit, Unit>? AddCatCommand { get; set; }
@@ -62,13 +42,12 @@ namespace BlazorTest.Client.ViewModels
 
         private void RegisterCommands()
         {
-            com = ReactiveCommand.CreateFromTask(async () => { await Task.Delay(0); IsActive = !IsActive; });
             diceRoleCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 await Task.Delay(0);
                 Random rand = new Random();
                 RandomNumber = rand.Next();
-            }, this.WhenAnyValue(x => x.IsActive));
+            });
             AddDogCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 await Task.Delay(0);

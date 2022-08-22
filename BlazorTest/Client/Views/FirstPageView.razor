@@ -5,11 +5,11 @@
 <PageTitle>Dice</PageTitle>
 
 <h1>Dice Role</h1>
-<p>@MyProperty</p>
-<input type="number" @bind-value="@Num" @bind-value:event="oninput"/>
-<p>@TestMyVar</p>
-<p hidden="@TestMyVar">@Num</p>
-<SecondPageView @bind-IsActive="@TestMyVar"
-                @bind-RandomNumber="@Num"/>
+<p>@ViewModel.MyProperty</p>
+<input type="number" @bind-value="ViewModel.Num" @bind-value:event="oninput"/>
+<p>@ViewModel.TestMyVar</p>
+<p hidden="@ViewModel.TestMyVar">@ViewModel.Num</p>
+<SecondPageView @bind-IsActive="ViewModel.TestMyVar"
+                @bind-RandomNumber="ViewModel.Num"/>
 <SecondPageView />
 <SecondPageView />

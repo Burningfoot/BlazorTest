@@ -5,6 +5,8 @@ namespace BlazorTest.Client.Views
     public partial class FirstPageView
     {
         private int myProperty;
+        private bool testMyVar;
+        private int num;
 
         [Parameter]
         public int MyProperty
@@ -17,17 +19,13 @@ namespace BlazorTest.Client.Views
             {
                 if (myProperty == value) return;
                 myProperty = value;
-                ViewModel.MyProperty = value;
                 MyPropertyChanged.InvokeAsync(value);
-                OnPropertyChanged();
             }
         }
 
-        private bool testMyVar;
-
         public bool TestMyVar
         {
-            get 
+            get
             {
                 return testMyVar;
             }
@@ -35,13 +33,9 @@ namespace BlazorTest.Client.Views
             {
                 if (testMyVar == value) return;
                 testMyVar = value;
-                ViewModel.TestMyVar = value;
                 TestMyVarChanged.InvokeAsync(value);
-                OnPropertyChanged();
             }
         }
-
-        private int num;
 
         public int Num
         {
@@ -53,12 +47,9 @@ namespace BlazorTest.Client.Views
             {
                 if (num == value) return;
                 num = value;
-                ViewModel.Num = value;
                 NumChanged.InvokeAsync(value);
-                OnPropertyChanged();
             }
         }
-
 
         [Parameter]
         public EventCallback<bool> TestMyVarChanged { get; set; }
@@ -68,5 +59,13 @@ namespace BlazorTest.Client.Views
 
         [Parameter]
         public EventCallback<int> NumChanged { get; set; }
+
+        protected override Task OnParametersSetAsync()
+        {
+            ViewModel.MyProperty = MyProperty;
+            ViewModel.Num = Num;
+            ViewModel.TestMyVar = TestMyVar;
+            return base.OnParametersSetAsync();
+        }
     }
 }

@@ -4,11 +4,11 @@
 @inherits ReactiveInjectableComponentBase<SecondPageViewModel>
 
 <p>@IsActive</p>
-<p>@RandomNumber</p>
-<button @onclick="@(() => @ViewModel.com.Execute())">Click!</button>
-<button @onclick="@(() => @ViewModel.diceRoleCommand.Execute() )">Role a dice now!</button>
-<AnimalListView @bind-AnimalList="@AnimalList"
-                @bind-SelectedAnimal="@SelectedAnimal"/>
-<button @onclick="@(() => @ViewModel.AddDogCommand.Execute())">Add a Dog!</button>
-<button @onclick="@(() => @ViewModel.AddCatCommand.Execute())">Add a Cat!</button>
+<p>@ViewModel.RandomNumber</p>
+<button @onclick="(() => IsActive = !IsActive)">Click!</button>
+<button @onclick="(() => ViewModel.diceRoleCommand.Execute() )">Role a dice now!</button>
+<AnimalListView @bind-AnimalList="ViewModel.AnimalList"
+                @bind-SelectedAnimal="@ViewModel.SelectedAnimalName"/>
+<button @onclick="(() => ViewModel.AddDogCommand.Execute())">Add a Dog!</button>
+<button @onclick="(() => ViewModel.AddCatCommand.Execute())">Add a Cat!</button>
 <p>@ViewModel.SelectedAnimalName</p>

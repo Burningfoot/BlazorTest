@@ -1,26 +1,29 @@
 ﻿using BlazorTest.Client.ViewModels;
-using Microsoft.AspNetCore.Components;
+using ReactiveUI;
 
 namespace BlazorTest.ViewModels
 {
     public class FirstPageViewModel : BaseViewModel
     {
         private bool testMyVar;
+        private int myProperty;
+        private int num;
 
-        public int MyProperty { get; set; }
+        public int MyProperty
+        {
+            get => myProperty;
+            set => this.RaiseAndSetIfChanged(ref myProperty, value);
+        }
         public bool TestMyVar
         {
-            get { return testMyVar; }
-            set 
-            { 
-                testMyVar = value;
-                if (value)
-                {
-                    Num = 0;
-                }
-            }
+            get => testMyVar;
+            set => this.RaiseAndSetIfChanged(ref testMyVar, value);
         }
-        public int Num { get; set; }
+        public int Num
+        {
+            get => num;
+            set => this.RaiseAndSetIfChanged(ref num, value);
+        }
 
         public FirstPageViewModel()
         {

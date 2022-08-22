@@ -8,8 +8,8 @@ namespace BlazorTest.Client.Views
     {
         private bool isActiveChanged;
         private int randomNumber;
-        private ObservableCollection<Animal>? animalList;
-        private string? selectedAnimal;
+        private ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
+        private string selectedAnimal;
 
         [Parameter]
         public bool IsActive
@@ -22,9 +22,7 @@ namespace BlazorTest.Client.Views
             {
                 if (isActiveChanged == value) return;
                 isActiveChanged = value;
-                ViewModel.IsActive = value;
                 IsActiveChanged.InvokeAsync(value);
-                OnPropertyChanged();
             }
         }  
 
@@ -39,31 +37,30 @@ namespace BlazorTest.Client.Views
             {
                 if (randomNumber == value) return;
                 randomNumber = value;
-                ViewModel.RandomNumber = value;
                 RandomNumberChanged.InvokeAsync(value);
-                OnPropertyChanged();
             }
         }
         
-        public ObservableCollection<Animal>? AnimalList
+        public ObservableCollection<Animal> AnimalList
         {
             get { return animalList; }
             set
             {
                 if(animalList == value) return;
                 animalList = value;
-                ViewModel.AnimalList = value;
                 AnimalListChanged.InvokeAsync(value);
-                OnPropertyChanged();
             }
         }
 
-        public string? SelectedAnimal
+        [Parameter]
+        public string SelectedAnimal
         {
             get { return selectedAnimal; }
             set
             {
+                if(selectedAnimal == value) return;
                 selectedAnimal = value;
+                SelectedAnimalChanged.InvokeAsync(value);
             }
         }
 
@@ -77,5 +74,13 @@ namespace BlazorTest.Client.Views
 
         [Parameter]
         public EventCallback<int> RandomNumberChanged { get; set; }
+
+        protected override Task OnParametersSetAsync()
+        {
+            ViewModel.AnimalList = AnimalList;
+            ViewModel.SelectedAnimalName = SelectedAnimal;
+            ViewModel.RandomNumber = RandomNumber;
+            return base.OnParametersSetAsync();
+        }
     }
 }

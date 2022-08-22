@@ -1,5 +1,6 @@
 ﻿using BlazorTest.Client.Models;
 using Microsoft.AspNetCore.Components;
+using ReactiveUI;
 using System.Collections.ObjectModel;
 
 namespace BlazorTest.Client.ViewModels
@@ -16,19 +17,16 @@ namespace BlazorTest.Client.ViewModels
             }
         }
 
-        private string? selectedAnimal;
-        public string? SelectedAnimal
+        private string selectedAnimal;
+
+        public string SelectedAnimal
         {
-            get { return selectedAnimal; }
-            set 
-            {
-                selectedAnimal = value;
-            }
+            get => selectedAnimal;
+            set => this.RaiseAndSetIfChanged(ref selectedAnimal, value);
         }
 
         public AnimalListViewModel()
         {
-            AnimalList = new ObservableCollection<Animal>();
         }
 
     }

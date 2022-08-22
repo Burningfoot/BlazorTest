@@ -1,15 +1,16 @@
 ﻿@using ReactiveUI.Blazor
 @inherits ReactiveInjectableComponentBase<AnimalListViewModel>
 
-@foreach (var item in @AnimalList)
+@foreach (var item in @ViewModel.AnimalList)
 {
     <p style="background-color:@item.BackgroundColor">@item.Name</p>
 
 }
-<select @bind="@SelectedAnimal">
-    @foreach (var item in @AnimalList)
+<select @bind="ViewModel.SelectedAnimal">
+    @foreach (var item in @ViewModel.AnimalList)
     {
         <option value="@item.Name">@item.Name</option>
     }
 </select>
+<p>@ViewModel.SelectedAnimal</p>
 
