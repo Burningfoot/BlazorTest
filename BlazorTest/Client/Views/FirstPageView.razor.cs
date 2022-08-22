@@ -47,7 +47,6 @@ namespace BlazorTest.Client.Views
             {
                 if (num == value) return;
                 num = value;
-                NumChanged.InvokeAsync(value);
             }
         }
 
@@ -58,7 +57,7 @@ namespace BlazorTest.Client.Views
         public EventCallback<int> MyPropertyChanged { get; set; }
 
         [Parameter]
-        public EventCallback<int> NumChanged { get; set; }
+        public EventCallback<ChangeEventArgs> NumChanged { get; set; }
 
         protected override Task OnParametersSetAsync()
         {

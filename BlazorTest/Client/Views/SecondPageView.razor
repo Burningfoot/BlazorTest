@@ -6,7 +6,7 @@
 <p>@IsActive</p>
 <p>@ViewModel.RandomNumber</p>
 <button @onclick="(() => IsActive = !IsActive)">Click!</button>
-<button @onclick="(() => ViewModel.diceRoleCommand.Execute() )">Role a dice now!</button>
+<button @onclick="(() => {ViewModel.diceRoleCommand.Execute(); RandomNumberChanged.InvokeAsync(ViewModel.RandomNumber);} )">Role a dice now!</button>
 <AnimalListView @bind-AnimalList="ViewModel.AnimalList"
                 @bind-SelectedAnimal="@ViewModel.SelectedAnimalName"/>
 <button @onclick="(() => ViewModel.AddDogCommand.Execute())">Add a Dog!</button>
